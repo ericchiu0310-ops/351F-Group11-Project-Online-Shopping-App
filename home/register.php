@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "php_shopping app");
+$conn = mysqli_connect("localhost:8889", "root", "root", "php_shopping app");
 
 if (!$conn) {
     die("Database connection failed.");

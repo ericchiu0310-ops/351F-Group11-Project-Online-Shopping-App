@@ -30,10 +30,12 @@ if ($_SESSION['usertype'] != "user") {
 </nav>
 
 <div class="checkout_box">
-    <h2>Welcome User</h2>
+    <h2>Welcome <?php echo htmlspecialchars($_SESSION['name']); ?></h2>
+    
     <p style="text-align:center; margin-bottom:20px;">
         You are logged in successfully.
     </p>
+
     <div style="text-align:center;">
         <a class="normal_btn" href="../index.php">Go Shopping</a>
     </div>

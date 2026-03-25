@@ -13,7 +13,7 @@ if ($_SESSION['usertype'] != "admin") {
     exit();
 }
 
-$conn = mysqli_connect("localhost", "root", "", "php_shopping app");
+$conn = mysqli_connect("localhost:8889", "root", "root", "php_shopping app");
 /* 之後如果改 database，再一齊改 */
 
 if (!$conn) {

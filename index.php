@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$conn = mysqli_connect("localhost", "root", "", "php_shopping app");
+$conn = mysqli_connect("localhost:8889", "root", "root", "php_shopping app");
 /* 之後如果改 database，再一齊改 */
 
 if (!$conn) {
@@ -37,11 +37,22 @@ $products_result = mysqli_query($conn, "SELECT * FROM products ORDER BY id ASC")
         <li><a href="index.php">Home</a></li>
         <li><a href="#products">Products</a></li>
         <li><a href="cart.php">Cart (<?php echo $count; ?>)</a></li>
-        <li><a href="home/login.php">LogOut</a></li>
+        
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <li><a href="logout.php">Logout (<?php echo htmlspecialchars($_SESSION['name']); ?>)</a></li>
+        <?php else: ?>
+            <li><a href="home/login.php">Login</a></li>
+        <?php endif; ?>
     </ul>
 </nav>
 
 <main>
+    <main>
+    <?php if (isset($_GET['logout']) && $_GET['logout'] == 'success'): ?>
+        <div style="background-color: #d4edda; color: #155724; padding: 15px; text-align: center; border: 1px solid #c3e6cb; margin: 10px auto; width: 80%; border-radius: 5px;">
+            <i class="fa fa-check-circle"></i> You have been logged out successfully.
+        </div>
+    <?php endif; ?>
     <div>
         <img class="my_cover" src="images/cover.jpeg" alt="cover">
     </div>
@@ -101,7 +112,11 @@ $products_result = mysqli_query($conn, "SELECT * FROM products ORDER BY id ASC")
             <p><a href="index.php">Home</a></p>
             <p><a href="#products">Products</a></p>
             <p><a href="cart.php">Cart</a></p>
-            <p><a href="home/login.php">Login</a></p>
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <p><a href="logout.php">Logout</a></p>
+            <?php else: ?>
+                <p><a href="home/login.php">Login</a></p>
+            <?php endif; ?>
         </div>
 
         <div>

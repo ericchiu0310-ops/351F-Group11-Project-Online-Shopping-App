@@ -6,7 +6,7 @@ require __DIR__ . '/vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-$conn = mysqli_connect("localhost", "root", "", "php_shopping app");
+$conn = mysqli_connect("localhost:8889", "root", "root", "php_shopping app");
 
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
@@ -143,10 +143,12 @@ if (isset($_POST['place_order'])) {
             $payment != ""
         ) {
             $cartCopy = $_SESSION['cart'];
-            $conn = mysqli_connect("localhost", "root", "", "php_shopping app");
+            $conn = mysqli_connect("localhost:8889", "root", "root", "php_shopping app");
 
-            $sql = "INSERT INTO orders (customer_name, customer_email, total_amount)
-                    VALUES ('$fullname', '$email', '$grand_total')";
+            
+            $user_id = 1; 
+            $sql = "INSERT INTO orders (user_id, customer_name, customer_email, total_amount)
+                    VALUES ('$user_id', '$fullname', '$email', '$grand_total')";
             mysqli_query($conn, $sql);
 
             $order_id = mysqli_insert_id($conn);
